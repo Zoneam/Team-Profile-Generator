@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "inquirer": "^8.1.0",
+    "jest": "^26.6.3"
+  },
+  "name": "generator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zoneam/Team-Profile-Generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zoneam/Team-Profile-Generator/issues"
+  },
+  "homepage": "https://github.com/Zoneam/Team-Profile-Generator#readme",
+  "description": ""
+}
