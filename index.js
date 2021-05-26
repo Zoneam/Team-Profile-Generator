@@ -1,6 +1,5 @@
 const inquirer = require("inquirer");
 const fs = require('fs');
-const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
@@ -16,44 +15,42 @@ const addStaff = [{
     type: "list",
     choices: ["Intern", "Engineer", "Done Adding"]
 }]
-async function writeHtml() {
-    fs.writeFile('index.html', myHtml, (err) => {
-        err ? console.log(err) : console.log('Success!')
-    })
-}
 
 async function addMember() {
-    await inquirer.prompt(addStaff)
-        .then((answers) => {
-            switch (answers.teamMember) {
-                case "Intern":
-                    inquirer.prompt(internQuestions)
-                        .then((answers) => {
-                            console.log(answers)
-                            answers.role = "Intern";
-                            teamMembers.push(answers)
-                            console.log(teamMembers)
-                            addMember();
-                        })
-                    return
-                case "Engineer":
-                    inquirer.prompt(engineerQuestions)
-                        .then((answers) => {
-                            answers.role = "Engineer";
-                            teamMembers.push(answers)
-                            console.log(teamMembers)
-                            addMember();
-                        })
-                    return
-                case "Done Adding":
-                    buildHtml();
-                    return
-            }
-        })
+    try {
+        await inquirer.prompt(addStaff)
+            .then((answers) => {
+                switch (answers.teamMember) {
+                    case "Intern":
+                        inquirer.prompt(internQuestions)
+                            .then((answers) => {
+                                console.log(answers)
+                                answers.role = "Intern";
+                                teamMembers.push(answers)
+                                console.log(teamMembers)
+                                addMember();
+                            })
+                        return
+                    case "Engineer":
+                        inquirer.prompt(engineerQuestions)
+                            .then((answers) => {
+                                answers.role = "Engineer";
+                                teamMembers.push(answers)
+                                console.log(teamMembers)
+                                addMember();
+                            })
+                        return
+                    case "Done Adding":
+                        buildHtml();
+                        return
+                }
+            })
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 function buildHtml() {
-
     teamMembers.forEach((member) => {
         if (member.role === "Manager") {
             const addedManager = new Manager(member.managerName, member.managerId, member.managerEmail, member.managerOffice)
@@ -91,12 +88,36 @@ function buildHtml() {
         </ul>
     </div>`
         }
-
     })
-    console.log("member", htmlInject)
-
     writeHtml();
 }
+
+
+function writeHtml() {
+    try {
+        fs.writeFile('index.html', myHtml, (err) => {
+            err ? console.log(err) : console.log('Success!')
+        })
+    } catch (err) {
+        console.log(err)
+    } finally {
+        console.log("myHtml", myHtml)
+        document.getElementsByClassName("my-team-cards").append("<b>Appended text</b>");
+    }
+}
+
+// function writeHtml() {
+//     let myPromise = new Promise((resolve, reject) => {
+//             fs.writeFile('index.html', myHtml, (err) => {
+//                 err ? console.log(err) : console.log('Success!')
+//                 console.log(resolve)
+//             })
+//         })
+//         .then(() => {
+//             console.log("------------------")
+//             document.getElementsByClassName("my-team-cards").append("<b>Appended text</b>");
+//         })
+// }
 
 async function init() {
     try {
@@ -112,6 +133,5 @@ async function init() {
     }
 }
 
-// fs.writeHtml(generateHtml(answers))
-// const manager = new Manager(answers.name, answers.id, answers.email, answers.officeNumber)
+
 init();
