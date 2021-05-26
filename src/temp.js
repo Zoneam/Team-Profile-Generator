@@ -1,4 +1,4 @@
-const myHtml = `<!DOCTYPE html>
+let myHtml = `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,14 +21,9 @@ const myHtml = `<!DOCTYPE html>
         </div>
     </div>
 
-    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header">Manager</div>
-        <ul class="list-group">
-            <li class="list-group-item list-group-item-info"><a href="mailto:zoneam@gmail.com">zoneam@gmail.com</a></li>
-            <li class="list-group-item list-group-item-info">Id: 256</li>
-            <li class="list-group-item list-group-item-info">Office# 147</li>
-        </ul>
-    </div>
+<div class="my-team-cards">
+
+</div>
 
 
 </body>
