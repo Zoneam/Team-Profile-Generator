@@ -3,12 +3,12 @@ const fs = require('fs');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
-const myHtml = require('./src/temp');
 const managerQuestions = require('./managerQuestions')
 const engineerQuestions = require('./engineerQuestions')
 const internQuestions = require('./internQuestions')
 let teamMembers = [];
 let htmlInject;
+let myHtml;
 const addStaff = [{
     message: "What type of team member you want to add ?",
     name: "teamMember",
@@ -24,10 +24,8 @@ async function addMember() {
                     case "Intern":
                         inquirer.prompt(internQuestions)
                             .then((answers) => {
-                                console.log(answers)
                                 answers.role = "Intern";
                                 teamMembers.push(answers)
-                                console.log(teamMembers)
                                 addMember();
                             })
                         return
@@ -36,13 +34,11 @@ async function addMember() {
                             .then((answers) => {
                                 answers.role = "Engineer";
                                 teamMembers.push(answers)
-                                console.log(teamMembers)
                                 addMember();
                             })
                         return
                     case "Done Adding":
                         buildHtml();
-                        return
                 }
             })
     } catch (err) {
@@ -57,69 +53,72 @@ function buildHtml() {
             htmlInject = `<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
         <div class="card-header">Manager</div>
         <ul class="list-group">
-             < li class = "list-group-item list-group-item-info" > Name: ${addedManager.getName()} < /li>
-            < li class = "list-group-item list-group-item-info" > < a href = "mailto:${addedManager.getEmail()}" > ${addedManager.getEmail()} < /a></li >
-            < li class = "list-group-item list-group-item-info" > Id: ${addedManager.getId()}< /li>
-            < li class = "list-group-item list-group-item-info" > Office# ${member.managerOffice} < /li>
+             <li class = "list-group-item list-group-item-info"> Name: ${addedManager.getName()} </li>
+            <li class = "list-group-item list-group-item-info"> <a href = "mailto:${addedManager.getEmail()}" > ${addedManager.getEmail()} </a></li>
+            <li class = "list-group-item list-group-item-info"> Id: ${addedManager.getId()}</li>
+            <li class = "list-group-item list-group-item-info"> Office# ${member.managerOffice} </li>
         </ul>
     </div>`
         }
         if (member.role === "Engineer") {
-            const addedEngineer = new Engineer(member.engineerName, member.engineerId, member.engineerEmail, member.engineerGitHub)
+            const addedEngineer = new Engineer(member.engineerName, member.engineerId, member.engineerEmail, member.engineerGithub)
             htmlInject += `<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header">Manager</div>
+        <div class="card-header">Engineer</div>
         <ul class="list-group">
-             < li class = "list-group-item list-group-item-info" > Name: ${addedEngineer.getName()} < /li>
-             < li class = "list-group-item list-group-item-info" > Id: ${addedEngineer.getId()} < /li>
-            < li class = "list-group-item list-group-item-info" > < a href = "mailto:${addedEngineer.getEmail()}" > ${addedEngineer.getEmail()} < /a></li >
-            < li class = "list-group-item list-group-item-info" > GitHub ${addedEngineer.getGitHub()} < /li>
+             <li class = "list-group-item list-group-item-info"> Name: ${addedEngineer.getName()} </li>
+             <li class = "list-group-item list-group-item-info"> Id: ${addedEngineer.getId()} </li>
+            <li class = "list-group-item list-group-item-info"> <a href="mailto:${addedEngineer.getEmail()}" > ${addedEngineer.getEmail()} </a></li>
+            <li class = "list-group-item list-group-item-info"> GitHub ${addedEngineer.getGitHub()} </li>
         </ul>
     </div>`
         }
         if (member.role === "Intern") {
             const addedIntern = new Intern(member.internName, member.internId, member.internEmail, member.internGitHub)
             htmlInject += `<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header">Manager</div>
+        <div class="card-header">Intern</div>
         <ul class="list-group">
-             < li class = "list-group-item list-group-item-info" > Name: ${addedIntern.getName()} < /li>
-             < li class = "list-group-item list-group-item-info" > Id: ${addedIntern.getId()} < /li>
-            < li class = "list-group-item list-group-item-info" > < a href = "mailto:${addedIntern.getEmail()}" > ${addedIntern.getEmail()} < /a></li >
-            < li class = "list-group-item list-group-item-info" > School:  ${addedIntern.getSchool()} < /li>
+             <li class = "list-group-item list-group-item-info"> Name:${addedIntern.getName()} </li>
+             <li class = "list-group-item list-group-item-info"> Id: ${addedIntern.getId()} </li>
+            <li class = "list-group-item list-group-item-info"> <a href="mailto:${addedIntern.getEmail()}" > ${addedIntern.getEmail()} </a></li>
+            <li class = "list-group-item list-group-item-info"> School: ${addedIntern.getSchool()} </li>
         </ul>
     </div>`
         }
     })
+myHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Team</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../dist/style.css">
+</head>
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-4">My Team</h1>
+            <p class="lead"></p>
+        </div>
+    </div>
+<div class="my-team-cards">
+${htmlInject}
+</div>
+</body>
+</html>`
     writeHtml();
 }
 
-
 function writeHtml() {
-    try {
         fs.writeFile('index.html', myHtml, (err) => {
-            err ? console.log(err) : console.log('Success!')
+            err ? console.log(err) : console.log(`\x1b[42m\x1b[34m Success!` + `\x1b[0m your file has been generated, look for "index.html" in root folder`)
         })
-    } catch (err) {
-        console.log(err)
-    } finally {
-        console.log("myHtml", myHtml)
-        document.getElementsByClassName("my-team-cards").append("<b>Appended text</b>");
-    }
 }
 
-// function writeHtml() {
-//     let myPromise = new Promise((resolve, reject) => {
-//             fs.writeFile('index.html', myHtml, (err) => {
-//                 err ? console.log(err) : console.log('Success!')
-//                 console.log(resolve)
-//             })
-//         })
-//         .then(() => {
-//             console.log("------------------")
-//             document.getElementsByClassName("my-team-cards").append("<b>Appended text</b>");
-//         })
-// }
-
 async function init() {
+    
     try {
         console.clear();
         await inquirer.prompt(managerQuestions)
@@ -132,6 +131,5 @@ async function init() {
         console.log(err)
     }
 }
-
 
 init();

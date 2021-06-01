@@ -3,13 +3,22 @@ const engineerQuestions = [{
     name: "engineerName",
     type: "input",
     validate: function (engineerName) {
-        if (/^[0-9a-zA-Z_]+$/.test(engineerName)) {
+        if (/^[a-zA-Z]+$/.test(engineerName)) {
             return true;
         } else {
+            console.log("\033[31m  <-- Please enter a valid Name")
             return false;
         }
+        },   
+        filter: (engineerName) => {
+            if (!/^[a-zA-Z]+$/.test(engineerName)) {
+                return engineerName = ""
+            } else
+                return engineerName
+        }
     }
-}, {
+    
+, {
     message: "What is your engineer's Id ?",
     name: "engineerId",
     type: "input",
@@ -17,19 +26,33 @@ const engineerQuestions = [{
         if (/^[0-9]+$/.test(engineerId)) {
             return true;
         } else {
+            console.log("\033[31m  <-- Please enter a valid ID")
             return false;
         }
+    },
+    filter: (engineerId) => {
+        if (!/^[0-9]+$/.test(engineerId)) {
+            return engineerId = ""
+        } else
+            return engineerId
     }
 }, {
     message: "What is your engineer's email ?",
     name: "engineerEmail",
     type: "input",
     validate: function (engineerEmail) {
-        if (/^[0-9a-zA-Z_]+$/.test(engineerEmail)) {
+        if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(engineerEmail)) {
             return true;
         } else {
+            console.log("\033[31m  <-- Please enter a valid email")
             return false;
         }
+    },
+    filter: (engineerEmail) => {
+        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(engineerEmail)) {
+            return engineerEmail = ""
+        } else
+            return engineerEmail
     }
 }, {
     message: "What is your engineer's GitHub username ?",
@@ -39,8 +62,15 @@ const engineerQuestions = [{
         if (/^[0-9a-zA-Z_]+$/.test(engineerGitHub)) {
             return true;
         } else {
+            console.log("\033[31m  <-- Please enter a valid GitHub Username")
             return false;
         }
+    },
+    filter: (engineerGitHub) => {
+        if (!/^[0-9a-zA-Z_]+$/.test(engineerGitHub)) {
+            return engineerGitHub = ""
+        } else
+            return engineerGitHub
     }
 
 }]

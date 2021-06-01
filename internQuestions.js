@@ -3,33 +3,54 @@ const internQuestions = [{
     name: "internName",
     type: "input",
     validate: function (internName) {
-        if (/^[0-9a-zA-Z_]+$/.test(internName)) {
+        if (/^[a-zA-Z]+$/.test(internName)) {
             return true;
         } else {
+            console.log("\033[31m  <-- Please enter a valid Name")
             return false;
         }
+    },
+    filter: (internName) => {
+        if (!/^[a-zA-Z]+$/.test(internName)) {
+            return internName = ""
+        } else
+            return internName
     }
 }, {
     message: "What is your intern's Id ?",
     name: "internId",
     type: "input",
     validate: function (internId) {
-        if (/^[0-9]+$/.test(internId)) {
+        if (/^[0-9_]+$/.test(internId)) {
             return true;
         } else {
+            console.log("\033[31m  <-- Please enter a valid ID")
             return false;
         }
+    },
+    filter: (internId) => {
+        if (!/^[0-9_]+$/.test(internId)) {
+            return internId = ""
+        } else
+            return internId
     }
 }, {
     message: "What is your intern's email ?",
     name: "internEmail",
     type: "input",
     validate: function (internEmail) {
-        if (/^[0-9a-zA-Z_]+$/.test(internEmail)) {
+        if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(internEmail)) {
             return true;
         } else {
+            console.log("\033[31m  <-- Please enter a valid Email")
             return false;
         }
+    },
+    filter: (internEmail) => {
+        if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(internEmail)) {
+            return internEmail = ""
+        } else
+            return internEmail
     }
 }, {
     message: "What is your intern's school ?",
@@ -39,8 +60,15 @@ const internQuestions = [{
         if (/^[0-9a-zA-Z_]+$/.test(internGitHub)) {
             return true;
         } else {
+            console.log("\033[31m  <-- Please enter a valid GitHub Username")
             return false;
         }
+    },
+    filter: (internGitHub) => {
+        if (!/^[0-9a-zA-Z_]+$/.test(internGitHub)) {
+            return internGitHub = ""
+        } else
+            return internGitHub
     }
 
 }]
