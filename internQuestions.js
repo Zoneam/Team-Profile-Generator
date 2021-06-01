@@ -54,21 +54,21 @@ const internQuestions = [{
     }
 }, {
     message: "What is your intern's school ?",
-    name: "internGithub",
+    name: "internSchool",
     type: "input",
-    validate: function (internGitHub) {
-        if (/^[0-9a-zA-Z_]+$/.test(internGitHub)) {
+    validate: function (internSchool) {
+        if (/^[0-9a-zA-Z_]+$/.test(internSchool)) {
             return true;
         } else {
-            console.log("\033[31m  <-- Please enter a valid GitHub Username")
+            console.log("\033[31m  <-- Please enter a valid school name")
             return false;
         }
     },
-    filter: (internGitHub) => {
-        if (!/^[0-9a-zA-Z_]+$/.test(internGitHub)) {
-            return internGitHub = ""
+    filter: (internSchool) => {
+        if (!/^[0-9a-zA-Z_]+$/.test(internSchool)) {
+            return internSchool = ""
         } else
-            return internGitHub
+            return internSchool
     }
 
 }]
