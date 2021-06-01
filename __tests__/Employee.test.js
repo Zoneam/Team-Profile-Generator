@@ -8,9 +8,26 @@ describe('Test', () => {
         const newEmployee = new Employee("Hayk","004","zoneam@gmail.com")
   
         // Assert
-        expect(newEmployee.name).toEqual("Hayk");
+        expect(newEmployee.getName()).toEqual("Hayk");
+        expect(newEmployee.getId()).toEqual("004");
+        expect(newEmployee.getEmail()).toEqual("zoneam@gmail.com");
+        expect(newEmployee.getRole()).toEqual("Employee");
       });
   
     });
   });
   
+
+// name
+
+// id
+
+// email
+
+// getName()
+
+// getId()
+
+// getEmail()
+
+// getRole()—returns 'Employ
