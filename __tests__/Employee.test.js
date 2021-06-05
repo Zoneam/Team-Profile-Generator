@@ -17,17 +17,3 @@ describe('Test', () => {
     });
   });
   
-
-// name
-
-// id
-
-// email
-
-// getName()
-
-// getId()
-
-// getEmail()
-
-// getRole()—returns 'Employ
