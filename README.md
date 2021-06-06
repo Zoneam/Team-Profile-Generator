@@ -1,5 +1,7 @@
 # Team Profile Generator
 
+# [Live Generated Sample html](https://zoneam.github.io/Team-Profile-Generator/)
+
 ## Description
 
 ---
@@ -40,6 +42,6 @@ _Tests for application and how to run them:_
 
 For any questions, please contact me with the information below:
 
-## [<img src="https://image.flaticon.com/icons/png/512/726/726623.png" width="40" >](mailto:zoneam@gmail.com)      [<img src="https://image.flaticon.com/icons/png/512/270/270798.png" width="40" >](https://github.com/zoneam)
+## Contact me:  [<img src="https://image.flaticon.com/icons/png/512/726/726623.png" width="40" >](mailto:zoneam@gmail.com)  [<img src="https://image.flaticon.com/icons/png/512/270/270798.png" width="40" >](https://github.com/zoneam)
 
 ![Screen Capture](./src/capture.gif)
